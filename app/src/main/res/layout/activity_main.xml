@@ -1,58 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/radioStudent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Капитализация российских компаний\n на конец 2020 года" />
-    </LinearLayout>
+            android:text="По ученику"
+            android:checked="true" />
 
-    <LinearLayout
+        <RadioButton
+            android:id="@+id/radioSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="По предмету" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="3"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/companies_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_marginTop="8dp" />
 
     <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Результат:" />
+
+    <TextView
+        android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Введите часть имени компании\n" />
-    <EditText
-        android:id="@+id/toDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Удалить компании с такими именами из базы" />
-    <Button
-        android:id="@+id/statistics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Анализ данных" />
+        android:layout_marginTop="8dp"
+        android:textSize="16sp" />
+
 </LinearLayout>
