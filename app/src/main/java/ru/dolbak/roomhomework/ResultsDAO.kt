@@ -7,10 +7,16 @@ import androidx.room.*
 interface ResultsDao {
     @Query("SELECT * FROM results ORDER BY :order")
     fun getAll(order: String): LiveData<List<ResultEntity>>
-    @Insert
-    fun insert(vararg result: ResultEntity)
-    @Delete
-    fun delete(result: ResultEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(vararg result: ResultEntity)
+
+    @Query("DELETE FROM results WHERE name LIKE '%' || :substring || '%'")
+    suspend fun deleteByNameContaining(substring: String) //Removed the gettable object
+
     @Update
-    fun update(vararg result: ResultEntity)
+    suspend fun update(vararg result: ResultEntity)
+
+    @Query("SELECT * FROM results WHERE name = :name LIMIT 1")
+    suspend fun getByName(name: String): ResultEntity?
 }

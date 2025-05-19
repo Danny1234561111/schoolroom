@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 
 class SimpleDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-
     object  DBContract  {
         // Группируем данные
         object  Entry  : BaseColumns {
@@ -53,6 +52,18 @@ class SimpleDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         // вставляем данные в базу данных
         db?.insert(DBContract.Entry.TABLE_NAME, null, values)
     }
+    fun delete(substring: String): Int {
+        val db = writableDatabase
+        // Удаляем записи по условию
+        val deletedRows = db.delete(
+            DBContract.Entry.TABLE_NAME,
+            "${DBContract.Entry.COLUMN_NAME_NAME} LIKE ?",
+            arrayOf("%$substring%")
+        )
+        db.close()
+        return deletedRows // Возвращаем количество удаленных строк
+    }
+
 
     fun getAll(order: String): List<Result> {
         val allRecords = mutableListOf<Result>()
@@ -65,5 +76,4 @@ class SimpleDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return allRecords;
     }
-
 }
